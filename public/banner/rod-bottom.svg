@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 132">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7E4A8"/><stop offset=".5" stop-color="#C69A50"/><stop offset="1" stop-color="#7A5518"/></linearGradient>
+    <radialGradient id="k" cx="38%" cy="30%" r="75%"><stop offset="0" stop-color="#FBEBB8"/><stop offset="1" stop-color="#9A6E22"/></radialGradient>
+    <linearGradient id="t" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C8283E"/><stop offset="1" stop-color="#7A1630"/></linearGradient>
+  </defs>
+  <rect x="22" y="12" width="516" height="20" rx="10" fill="url(#g)"/>
+  <path d="M34 17 H526" stroke="#fff" stroke-opacity=".38" stroke-width="2"/>
+  <circle cx="16" cy="22" r="16" fill="url(#k)"/><circle cx="544" cy="22" r="16" fill="url(#k)"/>
+  <circle cx="16" cy="22" r="6" fill="#741B35"/><circle cx="544" cy="22" r="6" fill="#741B35"/>
+  <g id="tas">
+    <line x1="16" y1="38" x2="16" y2="58" stroke="#C69A50" stroke-width="2.5"/>
+    <circle cx="16" cy="64" r="7" fill="url(#k)"/>
+    <path d="M7 72 H25 L31 124 Q16 132 1 124 Z" fill="url(#t)"/>
+    <rect x="6" y="78" width="20" height="5" fill="#E7C979"/>
+    <path d="M10 86 L8 124 M16 86 V128 M22 86 L24 124" stroke="#E7C979" stroke-opacity=".5" stroke-width="1"/>
+  </g>
+  <use href="#tas" x="528"/>
+</svg>
