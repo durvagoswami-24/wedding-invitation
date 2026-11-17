@@ -891,9 +891,13 @@ export default function App() {
           </div>
         </footer>
       </div>
-      <div aria-hidden="true" className="pointer-events-none fixed bottom-3 left-3 z-[90] rounded-full border border-[#B99655]/40 bg-[#F8F0E3]/75 px-2.5 py-1 font-sans-clean text-[8px] tracking-[.16em] text-[#741B35]/65 shadow-sm backdrop-blur-[2px]">
-        Discover Websoft
-      </div>
+      <img
+        src={`${import.meta.env.BASE_URL}discover-websoft-watermark.png`}
+        alt=""
+        aria-hidden="true"
+        draggable="false"
+        className="pointer-events-none fixed inset-0 z-[45] h-full w-full object-cover opacity-[0.09] mix-blend-multiply"
+      />
     </div>
   );
 }
