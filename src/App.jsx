@@ -1,25 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { 
-  Menu, X, MapPin, Calendar, Music2,
+  Menu, X, MapPin, Music2,
   ChevronRight, Sparkles, Compass,
   Share2, ArrowUp, Check, ExternalLink,
   ChevronLeft,
 } from 'lucide-react';
 import { ScrollProgress, EnhanceStyles } from './Enhancements';
 import { RoyalGate, FlowFX } from './RoyalGate';
+import { FestivityTimeline } from './FestivityScrolls';
 import { GalleryCarousel } from './GalleryCarousel';
 import { byId, GALLERY_IDS, CLOSING_IDS } from './couplePhotos';
-import { RoyalStyles, RoyalBackdrop, RoyalHero, ArchFrame, ARCH_ORDER, ArchCountdown, ScrollBanner, DesertScene } from './RoyalTheme';
-import ganeshPujanPhoto from './assets/events/ganesh-pujan.jpg';
-import sangeetPhoto from './assets/events/sangeet.jpg';
-import monogramLogo from './assets/t-and-a-logo.jpeg';
-import divineGracePhoto from './assets/events/divine-grace-v2.jpg';
-import haldiPhotoUpdate from './assets/events/haldi-v2.jpg';
-import sunsetSipsPhoto from './assets/events/sunset-sips-v2.jpg';
-import foreverPhoto from './assets/events/circle-forever-v2.jpg';
-import royalGatheringPhoto from './assets/events/royal-gathering-reference.jpg';
-import grandWeddingPhoto from './assets/events/royal-gathering-v4.jpg';
+import { RoyalStyles, RoyalBackdrop, RoyalHero, ArchFrame, ArchCountdown, ScrollBanner, DesertScene } from './RoyalTheme';
+import weddingLogo from './assets/abhiraj-taniya-monogram-transparent.png';
 import gurudwaraArtwork from './assets/gurudwara-anand-karaj-wide.jpg';
 // --- CUSTOM SVG WATERCOLOR & BOTANICAL ARTWORK COMPONENTS ---
 
@@ -187,32 +180,7 @@ const FamilyArchFrame = () => (
   </svg>
 );
 
-// Event photography shared by the invitation cards and gallery.
-const eventPhotos = {
-  ganesh: divineGracePhoto,
-  sangeet: sangeetPhoto,
-  divine: ganeshPujanPhoto,
-  haldi: haldiPhotoUpdate,
-  sunset: sunsetSipsPhoto,
-  circle: foreverPhoto,
-  royal: royalGatheringPhoto,
-  grandWedding: grandWeddingPhoto,
-};
-
 const mapSearchUrl = (location) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
-
-const EventArtwork = ({ type, title, subtitle }) => {
-  return (
-  <div className="relative w-full h-full min-h-[220px] overflow-hidden bg-[#3B1220] sm:min-h-[280px] md:min-h-[380px]">
-      <img
-        src={eventPhotos[type] || ganeshPujanPhoto}
-        alt={`${title}${subtitle ? `: ${subtitle}` : ''}`}
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
-        loading="lazy"
-      />
-    </div>
-  );
-};
 
 // Custom sanctuary artwork generated for the Anand Karaj ceremony.
 const RefinedGurudwaraArtwork = () => (
@@ -464,109 +432,54 @@ export default function App() {
   // Celebration Events Data (Strictly following the brief & reference screenshots)
   const events = [
     {
-      num: "01",
-      chapter: "AUSPICIOUS BEGINNINGS",
-      title: "Ganesh Pujan",
-      date: "FRIDAY, 11 DECEMBER 2026",
-      time: "10:00 A.M.",
-      venue: "Own Residence — Dream House",
-      address: "Dream House, Kota",
+      num: "01", chapter: "AUSPICIOUS BEGINNINGS", title: "Ganesh Pujan",
+      date: "FRIDAY, 11 DECEMBER 2026", time: "10:00 A.M.",
+      venue: "Own Residence", address: "Tarana, Madhya Pradesh",
       quote: "With the blessings of our elders, we welcome you to Ganesh Pujan.",
-      colorKey: "ganesh",
-      layout: "image-left"
+      colorKey: "ganesh", layout: "image-left"
     },
     {
-      num: "02",
-      chapter: "COLOURS OF CELEBRATION",
-      title: "Rang-e-Jashn",
-      date: "FRIDAY, 11 DECEMBER 2026",
-      time: "3:00 P.M.",
-      venue: "Hotel Shri Kripa",
-      address: "Near Mahalok Deepo, Tarana",
+      num: "02", chapter: "COLOURS OF CELEBRATION", title: "Rang-e-Jashn",
+      date: "FRIDAY, 11 DECEMBER 2026", time: "3:00 P.M.",
+      venue: "Hotel Shri Kripa", address: "Near Mahalok Deepo, Tarana",
       quote: "Let's paint the day with colours, love & joy.",
       subText: "Sangeet, Dhol Beats & Festive Splendour",
-      colorKey: "sangeet",
-      layout: "image-right"
+      colorKey: "sangeet", layout: "image-right"
     },
     {
-      num: "03",
-      chapter: "ETERNAL BLESSINGS",
-      title: "Divine Grace",
-      date: "SATURDAY, 12 DECEMBER 2026",
-      time: "9:30 A.M.",
-      venue: "Dream House — Own Residence",
-      address: "Kota, Rajasthan",
+      num: "03", chapter: "ETERNAL BLESSINGS", title: "Divine Grace",
+      date: "SATURDAY, 12 DECEMBER 2026", time: "Mata Poojan: 9:30 A.M.",
+      venue: "Own Residence", address: "Tarana, Madhya Pradesh",
+      subText: "Grand Wedding Celebration · Mata Poojan",
       lunchTime: "12:30 P.M. onwards",
-      lunchVenue: "Hotel Shri Kripa, Near Mahalok Deepo",
+      lunchVenue: "Hotel Shri Kripa, Near Mahalok Deepo, Tarana",
       lunchAddress: "Tarana, Madhya Pradesh",
       quote: "To seek the blessings of Maa for a bright and prosperous new beginning.",
-      colorKey: "divine",
-      layout: "image-left"
+      colorKey: "divine", layout: "image-left"
     },
     {
-      num: "04",
-      chapter: "FESTIVE GRANDEUR",
-      title: "The Grand Wedding Celebration",
-      date: "SATURDAY, 12 DECEMBER 2026",
-      time: "Mata Poojan: 9:30 A.M.",
-      lunchTime: "12:30 P.M. onwards",
-      venue: "Hotel Shri Kripa, Near Mahalok Deepo, Tarana",
-      address: "Tarana, Madhya Pradesh",
-      quote: "Surrounded by heritage, sacred traditions and laughter of cherished friends.",
-      colorKey: "grandWedding",
-      layout: "image-right"
-    },
-    {
-      num: "05",
-      chapter: "SUNSHINE & TRADITION",
-      title: "The Golden Glow",
-      date: "SUNDAY, 13 DECEMBER 2026",
-      time: "11:30 A.M. onwards",
-      venue: "Hotel Menaal Residency",
-      address: "Bundi Road, Kota, Rajasthan",
+      num: "04", chapter: "SUNSHINE & TRADITION", title: "The Golden Glow",
+      date: "SUNDAY, 13 DECEMBER 2026", time: "11:30 A.M. onwards",
+      venue: "Hotel Menaal Residency", address: "Bundi Road, Kota, Rajasthan",
       quote: "A Day To Drench In Traditions, Laughter & Love.",
       subText: "Haldi ceremony filled with marigold petals & golden memories.",
-      colorKey: "haldi",
-      layout: "image-left"
+      colorKey: "haldi", layout: "image-left"
     },
     {
-      num: "06",
-      chapter: "TWILIGHT RENDEZVOUS",
-      title: "The Sunset Sips",
-      date: "SUNDAY, 13 DECEMBER 2026",
-      time: "8:30 P.M. onwards",
-      venue: "Hotel Menaal Residency",
-      address: "Bundi Road, Kota, Rajasthan",
-      quote: "A Night of Toasts, Tunes & Togetherness.",
-      subText: "Acoustic strings, clinking flutes & starry conversation.",
-      colorKey: "sunset",
-      layout: "image-right"
+      num: "05", chapter: "TWILIGHT RENDEZVOUS", title: "The Sunset Sips & Circle of Forever",
+      date: "SUNDAY, 13 DECEMBER 2026", time: "8:30 P.M. onwards",
+      venue: "Hotel Menaal Residency", address: "Bundi Road, Kota, Rajasthan",
+      quote: "A night of toasts, tunes, vows & togetherness.",
+      subText: "Acoustic music & vows beneath a canopy of roses and starlight.",
+      colorKey: "sunset", layout: "image-right"
     },
     {
-      num: "07",
-      chapter: "THE SACRED PROMISE",
-      title: "The Circle of Forever",
-      date: "SUNDAY, 13 DECEMBER 2026",
-      time: "8:30 P.M. onwards",
-      venue: "Hotel Menaal Residency",
-      address: "Bundi Road, Kota, Rajasthan",
-      quote: "A Promise Today, A Beautiful Tomorrow.",
-      subText: "Exchange of vows under a canopy of roses and starlight.",
-      colorKey: "circle",
-      layout: "image-left"
-    },
-    {
-      num: "08",
-      chapter: "THE REGAL SOIREE",
-      title: "The Royal Gathering",
-      date: "MONDAY, 14 DECEMBER 2026",
-      time: "8:00 P.M.",
-      venue: "Hotel Menaal Residency",
-      address: "Bundi Road, Kota, Rajasthan",
+      num: "06", chapter: "THE REGAL SOIREE", title: "The Royal Gathering",
+      date: "MONDAY, 14 DECEMBER 2026", time: "8:00 P.M.",
+      venue: "Hotel Menaal Residency", address: "Bundi Road, Kota, Rajasthan",
       quote: "An evening of love, togetherness & New Beginnings.",
-      subText: "Royal banquet dinner, candlelit courtyards & heartfelt melodies.",
-      colorKey: "royal",
-      layout: "image-right"
+      subText: "Dinner on the lawn, heartfelt melodies & new beginnings.",
+      colorKey: "royal", layout: "image-right"
     }
   ];
 
@@ -622,10 +535,7 @@ export default function App() {
 <ScrollProgress />
 <RoyalGate onOpen={toggleBackgroundMusic} onReveal={() => setHeroLive(true)} />
       <FlowFX />
-      {/* GOOGLE FONTS INJECTION */}
       <style dangerouslySetInnerHTML={{ __html: `
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap');
-        
         .font-serif-luxury {
           font-family: 'Cormorant Garamond', Georgia, serif;
         }
@@ -644,7 +554,7 @@ export default function App() {
           100% { transform: scale(1); }
         }
         .ken-burns {
-          animation: subtleKenBurns 28s ease-in-out infinite alternate;
+          animation: none;
         }
 
         /* Paper subtle grain overlay */
@@ -667,7 +577,7 @@ export default function App() {
         onClick={toggleBackgroundMusic}
         aria-label={isMusicPlaying ? 'Pause background music' : 'Play background music'}
         aria-pressed={isMusicPlaying}
-        className="fixed bottom-4 right-4 z-50 h-11 w-11 rounded-full bg-[#741B35] hover:bg-[#5B172B] text-[#E7D3A3] flex items-center justify-center shadow-xl border border-[#B99655] transition-transform active:scale-95 hover:scale-105 sm:bottom-6 sm:right-6 sm:h-12 sm:w-12"
+        className="fixed bottom-4 right-4 z-50 h-11 w-11 rounded-full bg-[#741B35] hover:bg-[#5B172B] text-[#E7D3A3] flex items-center justify-center shadow-xl border border-[#B99655] active:scale-95 sm:bottom-6 sm:right-6 sm:h-12 sm:w-12"
       >
         <Music2 className="w-5 h-5" />
         <span className="sr-only">{isMusicPlaying ? 'Pause music' : 'Play music'}</span>
@@ -681,7 +591,7 @@ export default function App() {
             onClick={() => scrollToSection('hero')} 
             className="flex items-center gap-2 group text-left"
           >
-            <img src={monogramLogo} alt="T & A" className="h-12 w-12 rounded-full border border-[#741B35]/80 object-cover shadow-[0_2px_10px_rgba(91,23,43,.1)] transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14" />
+            <img src={weddingLogo} alt="Abhiraj and Taniya monogram" className="h-12 w-12 object-contain drop-shadow-[0_2px_8px_rgba(91,23,43,.14)] sm:h-16 sm:w-16" />
           </button>
 
           {/* Mobile Menu Trigger & Share */}
@@ -736,7 +646,7 @@ export default function App() {
       {/* ===== ROYAL GATEWAY LAYOUT ===== */}
       <RoyalHero live={heroLive} reduced={!!reduceHeroMotion} onOpen={() => scrollToSection('invitation')} />
 
-      <main className="relative z-10">
+      <main className="relative z-[45]">
         {/* INVITATION INTRO */}
         <section id="invitation" className="relative overflow-hidden px-5 py-16 text-center sm:px-6 md:py-24">
           <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[310px] -z-10 h-[420px] w-[420px] -translate-x-1/2 rounded-full border border-dashed border-[#B99655]/40 sm:h-[520px] sm:w-[520px]" />
@@ -786,82 +696,7 @@ export default function App() {
               <p className="font-sans-clean mt-4 text-[10px] tracking-[.3em] text-[#741B35]/80">11 – 14 DECEMBER 2026</p>
             </div>
 
-            <div className="flex flex-col gap-14 sm:gap-20 md:gap-32">
-              {events.map((evt, idx) => {
-                const isEven = idx % 2 === 0;
-                const color = ARCH_ORDER[idx % ARCH_ORDER.length];
-                return (
-                  <div key={evt.title} className="rg-fx grid grid-cols-1 items-center gap-14 md:grid-cols-2 md:gap-10">
-                    <div className={isEven ? 'md:order-1' : 'md:order-2'}>
-                      <ArchFrame color={color} className="mx-auto h-[430px] w-full max-w-[340px] sm:h-[500px] sm:max-w-[390px]">
-                        <EventArtwork type={evt.colorKey} title={evt.title} subtitle={evt.chapter} />
-                      </ArchFrame>
-                    </div>
-
-                    <div className={`${isEven ? 'md:order-2' : 'md:order-1'} pt-10 md:pt-0`}>
-                      <ScrollBanner>
-                        <span className="font-sans-clean block text-[10px] font-medium uppercase tracking-[0.26em] text-[#E7D3A3]">
-                          {evt.num} / {evt.chapter}
-                        </span>
-                        <h3 className="font-serif-luxury my-2 text-3xl font-normal text-[#F8E9D5] sm:text-4xl">{evt.title}</h3>
-                        <GoldFlourish className="mx-auto h-4 w-28 text-[#E7D3A3]" />
-                        <p className="font-serif-luxury mx-auto my-3 max-w-sm text-base italic leading-relaxed text-[#F3DFC0] sm:text-lg">
-                          “{evt.quote.replace(/"/g, '')}”
-                        </p>
-                        {evt.subText && <p className="font-sans-clean mb-2 text-[10px] uppercase tracking-wider text-[#E7D3A3]">{evt.subText}</p>}
-
-                        <div className="my-4 space-y-1">
-                          <p className="font-sans-clean text-[11px] font-medium uppercase tracking-[0.14em] text-[#F8E9D5] sm:text-xs">
-                            {evt.date} · {evt.time}
-                          </p>
-                          {evt.lunchTime && (
-                            <p className="font-sans-clean text-[10px] uppercase tracking-wider text-[#E7D3A3]">Lunch: {evt.lunchTime}</p>
-                          )}
-                        </div>
-
-                        <div className="font-serif-luxury text-sm">
-                          <p className="text-base font-semibold text-[#F8E9D5]">{evt.venue}</p>
-                          <p className="font-sans-clean mt-0.5 text-[10px] tracking-wider text-[#E7D3A3]/85">{evt.address}</p>
-                          {evt.lunchVenue && (
-                            <div className="mt-1">
-                              <p className="text-xs italic text-[#F3DFC0]">Lunch Venue: {evt.lunchVenue}</p>
-                              <a
-                                href={mapSearchUrl(`${evt.lunchVenue}, ${evt.lunchAddress || evt.address}`)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="font-sans-clean inline-flex items-center gap-1 text-[10px] uppercase tracking-widest text-[#E7D3A3] hover:text-white"
-                              >
-                                <MapPin className="h-3 w-3" /> MAP LUNCH VENUE
-                              </a>
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
-                          <a
-                            href={mapSearchUrl(`${evt.venue}, ${evt.address}`)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`Open map for ${evt.venue}, ${evt.address}`}
-                            className="rg-gold-btn font-sans-clean inline-flex items-center gap-1.5 px-4 py-2 text-[10px] uppercase tracking-widest"
-                          >
-                            <MapPin className="h-3.5 w-3.5" /> Venue map <ExternalLink className="h-3 w-3" />
-                          </a>
-                          <a
-                            href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Taniya & Abhiraj: ' + evt.title)}&dates=20261211T043000Z/20261215T183000Z&details=${encodeURIComponent(evt.venue + ', ' + evt.address)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-sans-clean inline-flex items-center gap-1.5 border border-[#E7D3A3]/70 px-4 py-2 text-[10px] uppercase tracking-widest text-[#E7D3A3] transition-colors hover:bg-[#E7D3A3]/15"
-                          >
-                            <Calendar className="h-3 w-3" /> Add to calendar
-                          </a>
-                        </div>
-                      </ScrollBanner>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <FestivityTimeline events={events} />
           </div>
         </section>
 
@@ -1041,7 +876,7 @@ export default function App() {
       <div className="relative z-10">
         <DesertScene />
         <footer className="bg-gradient-to-b from-[#5B172B] to-[#3E0F1E] px-6 pb-8 pt-10 text-center text-[#E7D3A3]">
-          <img src={monogramLogo} alt="T & A" className="mx-auto h-14 w-14 rounded-full border border-[#E7D3A3]/70 object-cover" />
+          <img src={weddingLogo} alt="Abhiraj and Taniya monogram" className="mx-auto h-24 w-24 object-contain shadow-[0_2px_12px_rgba(0,0,0,.2)] sm:h-28 sm:w-28" />
           <p className="font-script mt-3 text-4xl text-[#E7D3A3]">Taniya &amp; Abhiraj</p>
           <p className="font-sans-clean mt-2 text-[10px] tracking-[.3em]">11 – 15 DECEMBER 2026 · KOTA, RAJASTHAN</p>
           <nav className="mx-auto mt-6 flex max-w-xl flex-wrap justify-center gap-x-6 gap-y-3">
@@ -1055,6 +890,9 @@ export default function App() {
             <p>&copy; 2026 · INVITATION DESIGNED BY DISCOVER WEBSOFT</p>
           </div>
         </footer>
+      </div>
+      <div aria-hidden="true" className="pointer-events-none fixed bottom-3 left-3 z-[90] rounded-full border border-[#B99655]/40 bg-[#F8F0E3]/75 px-2.5 py-1 font-sans-clean text-[8px] tracking-[.16em] text-[#741B35]/65 shadow-sm backdrop-blur-[2px]">
+        Discover Websoft
       </div>
     </div>
   );

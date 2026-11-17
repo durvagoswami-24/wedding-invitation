@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import closedGate from './assets/royal-gate-closed.jpg';
 import openGate from './assets/royal-gate-open.jpg';
+import weddingLogo from './assets/abhiraj-taniya-monogram-transparent.png';
 
 const reducedMotion = () =>
   typeof window !== 'undefined' &&
@@ -23,7 +24,7 @@ const GateArt = ({ opening, reduced }) => {
   return (
     <div className="absolute inset-0 overflow-hidden" style={{ perspective: '1500px', transformStyle: 'preserve-3d' }}>
       <img src={closedGate} alt="" aria-hidden="true" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover" draggable="false" />
-      <img src={openGate} alt="" aria-hidden="true" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover" draggable="false" style={{ opacity: opening ? 1 : 0, transition: `opacity ${reduced ? 0 : 650}ms ease ${opening && !reduced ? 300 : 0}ms` }} />
+      <img src={openGate} alt="" aria-hidden="true" fetchPriority="low" decoding="async" className="absolute inset-0 h-full w-full object-cover" draggable="false" style={{ opacity: opening ? 1 : 0, transition: `opacity ${reduced ? 0 : 650}ms ease ${opening && !reduced ? 300 : 0}ms` }} />
       {['left', 'right'].map((side) => (
         <div key={side} style={leaf(side)}>
           <img src={closedGate} alt="" aria-hidden="true" fetchPriority="high" decoding="async" className="absolute inset-0 h-full w-full object-cover" draggable="false" />
@@ -55,8 +56,8 @@ export const RoyalGate = ({ onOpen, onReveal, names = 'Taniya & Abhiraj' }) => {
     setPhase('opening');
     onOpen && onOpen();
     const later = (fn, ms) => timers.current.push(setTimeout(fn, ms));
-    later(() => { setPhase('fade'); onReveal && onReveal(); }, reduced ? 40 : 1700);
-    later(() => setPhase('gone'), reduced ? 300 : 2250);
+    later(() => { setPhase('fade'); onReveal && onReveal(); }, reduced ? 40 : 2000);
+    later(() => setPhase('gone'), reduced ? 300 : 2700);
   };
 
   const opening = phase !== 'closed';
@@ -79,11 +80,18 @@ export const RoyalGate = ({ onOpen, onReveal, names = 'Taniya & Abhiraj' }) => {
       role="dialog"
       aria-label="Wedding invitation. Open the gate to enter."
       onClick={open}
-      style={{ background: 'linear-gradient(180deg,#EFD3A8,#D9B27C)', opacity: phase === 'fade' ? 0 : 1, transition: `opacity ${reduced ? 250 : 550}ms ease`, cursor: phase === 'closed' ? 'pointer' : 'default' }}
+      style={{ background: 'linear-gradient(180deg,#EFD3A8,#D9B27C)', opacity: phase === 'fade' ? 0 : 1, transition: `opacity ${reduced ? 250 : 700}ms ease`, cursor: phase === 'closed' ? 'pointer' : 'default' }}
     >
       <div style={stageStyle}>
         <GateArt opening={opening} reduced={reduced} />
       </div>
+
+      {/* warm light floods in as the doors swing open, then dissolves into the hero */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{ background: 'radial-gradient(ellipse at 50% 55%, #FFF6DD 0%, #FBE7B8 55%, #F3D79B 100%)', opacity: opening ? 1 : 0, transition: `opacity ${reduced ? 0 : 800}ms ease ${opening && !reduced ? 900 : 0}ms` }}
+      />
 
       {/* Visible opening prompt sits on the door, clear of the names plaque. */}
       <button
@@ -97,17 +105,12 @@ export const RoyalGate = ({ onOpen, onReveal, names = 'Taniya & Abhiraj' }) => {
       </button>
 
       <div
-        aria-label="Khanda, Sikh symbol"
+        aria-label="Abhiraj and Taniya monogram"
         role="img"
-        className="pointer-events-none absolute left-1/2 top-[63%] z-20 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#F7DEA0] bg-[radial-gradient(circle_at_35%_28%,#FFF0B2,#D9A441_68%,#9D6424)] text-[#5B172B] shadow-[0_4px_18px_rgba(25,7,10,.5),inset_0_0_0_3px_rgba(255,240,178,.35)] sm:h-[4.5rem] sm:w-[4.5rem]"
+        className="pointer-events-none absolute left-1/2 top-[63%] z-20 -translate-x-1/2 -translate-y-1/2"
         style={{ opacity: opening ? 0 : 1, transition: 'opacity .25s ease' }}
       >
-        <svg viewBox="0 0 64 64" className="h-10 w-10 sm:h-11 sm:w-11" aria-hidden="true">
-          <circle cx="32" cy="29" r="16" fill="none" stroke="currentColor" strokeWidth="3.2" />
-          <path d="M32 3 22.5 25h6v18l-8 7 11.5 6 11.5-6-8-7V25h6L32 3Z" fill="currentColor" />
-          <path d="M17 13C5 18 3 31 10 43c3 5 8 9 14 11l3-4c-8-3-13-8-15-15-2-7 1-14 9-18l-4-4ZM47 13c12 5 14 18 7 30-3 5-8 9-14 11l-3-4c8-3 13-8 15-15 2-7-1-14-9-18l4-4Z" fill="currentColor" />
-          <path d="M23 54h18M28 58h8M32 56v5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
-        </svg>
+        <img src={weddingLogo} alt="" className="h-[88px] w-[88px] object-contain shadow-[0_4px_18px_rgba(25,7,10,.5)] sm:h-[100px] sm:w-[100px]" />
       </div>
 
       {/* names plaque (fixed on screen, not part of the zoom) */}
@@ -146,7 +149,7 @@ export const FlowFX = () => {
       seenGroup.set(group, n + 1);
       const isCard = el.matches('.rg-fx');
       el.classList.add('fx');
-      el.style.setProperty('--fx-x', isCard ? (n % 2 ? '60px' : '-60px') : '0px');
+      el.style.setProperty('--fx-x', '0px');
       el.style.setProperty('--fx-d', `${Math.min(n, 3) * 0.08}s`);
     });
 
@@ -179,8 +182,8 @@ export const FlowFX = () => {
 
   return (
     <style>{`
-      .fx { opacity: 0; transform: translate3d(var(--fx-x,0px), 40px, 0) scale(.97);
-        transition: opacity .7s cubic-bezier(.2,.7,.2,1) var(--fx-d,0s), transform .8s cubic-bezier(.2,.7,.2,1) var(--fx-d,0s); will-change: transform, opacity; }
+      .fx { opacity: 0; transform: translate3d(0, 18px, 0);
+        transition: opacity .6s cubic-bezier(.2,.7,.2,1) var(--fx-d,0s), transform .7s cubic-bezier(.2,.7,.2,1) var(--fx-d,0s); will-change: transform, opacity; }
       .fx.fx-in { opacity: 1; transform: none; }
       .hero-held, .hero-held *, .hero-held::before, .hero-held::after { animation-play-state: paused !important; }
     `}</style>

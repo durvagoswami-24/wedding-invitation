@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import monogramLogo from './assets/t-and-a-logo.jpeg';
+import weddingLogo from './assets/abhiraj-taniya-monogram-transparent.png';
 import palaceBackdrop from './assets/hero-wedding-background.jpg';
 
 const prefersReducedMotion = () =>
@@ -274,9 +274,9 @@ export const InvitationGate = ({ onOpen }) => {
           onClick={open}
           autoFocus
           aria-label="Open the wedding invitation"
-          className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-[#E7D3A3] bg-[#741B35] text-[#E7D3A3] shadow-[0_0_60px_rgba(231,211,163,.45)] transition-transform hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E7D3A3] sm:h-32 sm:w-32"
+          className="relative h-28 w-28 overflow-hidden rounded-full border-2 border-[#E7D3A3] bg-[#F5F0E8] text-[#E7D3A3] shadow-[0_0_60px_rgba(231,211,163,.45)] transition-transform hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E7D3A3] sm:h-32 sm:w-32"
         >
-          <img src={monogramLogo} alt="" className="w-full h-full rounded-full object-cover" />
+          <img src={weddingLogo} alt="" className="w-full h-full object-contain" />
           <span className="absolute inset-x-0 bottom-1 bg-[#5B172B]/80 py-1 font-sans-clean text-[8px] tracking-widest text-[#F8F0E3]">TAP TO OPEN</span>
         </button>
         <p className="font-sans-clean text-[11px] tracking-[0.25em] text-[#E7D3A3]/80 mt-6">11 – 15 December 2026</p>
