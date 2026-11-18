@@ -434,7 +434,7 @@ export default function App() {
     {
       num: "01", chapter: "AUSPICIOUS BEGINNINGS", title: "Ganesh Pujan",
       date: "FRIDAY, 11 DECEMBER 2026", time: "10:00 A.M.",
-      venue: "Own Residence", address: "Tarana, Madhya Pradesh",
+      venue: "Own Residence, Dream House", address: "Tarana (M.P.)",
       quote: "With the blessings of our elders, we welcome you to Ganesh Pujan.",
       colorKey: "ganesh", layout: "image-left"
     },
@@ -449,7 +449,7 @@ export default function App() {
     {
       num: "03", chapter: "ETERNAL BLESSINGS", title: "Divine Grace",
       date: "SATURDAY, 12 DECEMBER 2026", time: "Mata Poojan: 9:30 A.M.",
-      venue: "Own Residence", address: "Tarana, Madhya Pradesh",
+      venue: "Own Residence, Dream House", address: "Tarana (M.P.)",
       subText: "Grand Wedding Celebration · Mata Poojan",
       lunchTime: "12:30 P.M. onwards",
       lunchVenue: "Hotel Shri Kripa, Near Mahalok Deepo, Tarana",
